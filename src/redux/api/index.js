@@ -16,7 +16,7 @@ export const getAllTopics = async () => {
     const response = await fetch(url, options);
 
     if (!response.ok) {
-      return { error: true, code: response.statusCode };
+      return [];
     }
 
     const { data: { topic : { relatedTopics} } } = await response.json();

@@ -2,6 +2,7 @@ import {
   put,
   call,
   takeLatest,
+  delay,
 } from 'redux-saga/effects';
 
 import {
@@ -18,6 +19,8 @@ function* getTopics() {
   yield put({ type: SET_LOADING });
 
   const todos = yield call(getAllTopics);
+
+  yield delay(1500);
 
   yield put({ type: GET_TOPICS, payload: todos });
 }

@@ -3,16 +3,17 @@ import React, { useEffect, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import {
-  Typography,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Avatar,
   Chip,
+  LinearProgress,
   List,
   ListItem,
-  ListItemText,
   ListItemAvatar,
-  Avatar,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  ListItemText,
+  Typography,
 } from '@material-ui/core';
 
 import StarIcon from '@material-ui/icons/Star';
@@ -42,6 +43,9 @@ const styles = theme => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
+  noTopics: {
+    textAlign: 'center',
+  },
 });
 
 const TopicsView = props => {
@@ -65,6 +69,12 @@ const TopicsView = props => {
 
   return (
     <div>
+      {loading && (
+        <div>
+          <Typography variant={'h5'}>Loading Topics</Typography>
+          <LinearProgress />
+        </div>
+      )}
       {topics && topics.map((topic, index) => (
       <Accordion
         expanded={topic.id === openTopic}
@@ -97,6 +107,9 @@ const TopicsView = props => {
           </List>
         </AccordionDetails>
       </Accordion> ))}
+      {topics.length === 0 && !loading && (
+        <Typography variant={'h5'} className={classes.noTopics}>There's no topics related with the term "React"</Typography>
+      )}
     </div>
   );
 };
